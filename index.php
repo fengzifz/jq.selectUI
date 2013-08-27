@@ -31,3 +31,28 @@
     </form>
 </body>
 </html>
+<script type="text/javascript">
+    // new SelectUI('');
+    // var Calculator = function (decimalDigits, tax) {
+    //         this.decimalDigits = decimalDigits;
+    //         this.tax = tax;
+    //         alert(this.add(11,3));
+    //     };
+
+    //      Calculator.prototype = function () {
+    //         add = function (x, y) {
+    //             return x + y;
+    //         },
+
+    //         subtract = function (x, y) {
+    //             return x - y;
+    //         }
+    //         return {
+    //             add: add,
+    //             subtract: subtract
+    //         }
+    //     } ();
+
+    //     // alert((new Calculator()).add(11, 3));
+    //     new Calculator()
+</script>
