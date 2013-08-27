@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2013-08-27 09:40:55
+ * @version $Id$
+ */
+.row { width: 100%;}
+.row .label { width: 150px; display: block; float: left;}
