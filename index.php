@@ -38,7 +38,6 @@ function query(selector){
     var idNameReg = /^\#\S[\w\d]*/;
     // var a = selector.match(idNameReg);
     var idSelector = classNameReg.test(selector);
-    if()
     alert(a);
 }
 
