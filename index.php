@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>scrollUI</title>
+<title>selectUI</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link href="css/layout.css" rel="stylesheet">
@@ -32,7 +32,35 @@
 </body>
 </html>
 <script type="text/javascript">
-    // new SelectUI('');
+query('#row');
+function query(selector){
+    var classNameReg = /^\.\S[\w\d]*/;
+    var idNameReg = /^\#\S[\w\d]*/;
+    // var a = selector.match(idNameReg);
+    var idSelector = classNameReg.test(selector);
+    if()
+    alert(a);
+}
+
+
+// function query(selector) {
+//     var self = this.forEach ? this : [this];
+//     for (var list=[], i=0, m=self.length; i<m; i++) {
+//         var nodes = self[i].querySelectorAll(selector);
+//         for (var j=0, l=nodes.length; j<l; j++) {
+//             list.push(nodes[j]);
+//         }
+//     }
+//     return _.list(list);
+// }
+
+
+
+    // var settings = {
+    //     showTop: false
+    // };
+    // new SelectUI(settings);
+
     // var Calculator = function (decimalDigits, tax) {
     //         this.decimalDigits = decimalDigits;
     //         this.tax = tax;
