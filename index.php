@@ -7,8 +7,8 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link href="css/layout.css" rel="stylesheet">
-<!-- <script type="text/javascript" src="js/jquery-1.10.2.js"></script> -->
-<script type="text/javascript" src="js/selectUI.js"></script>
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jq.selectUI.js"></script>
 <!-- <script type="text/javascript" src="js/HTML.js"></script> -->
 </head>
 <body id="body">
@@ -51,12 +51,9 @@
 </body>
 </html>
 <script type="text/javascript">
-
-    var settings = {
-        selector: '.selectUI',
-        showTop: false
-    };
-    new SelectUI(settings);
-    // $$('#row').alertTest();
+(function($){
+    var option = {showTop: false, showBottom: false};
+    $('.selectUI').selectUI(option);
+})(jQuery)
 
 </script>
