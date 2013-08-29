@@ -8,5 +8,6 @@
 
 echo $_GET['name'];
 echo $_GET['language'];
+echo $_GET['color'];
 
 ?>

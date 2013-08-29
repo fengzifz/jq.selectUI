@@ -5,5 +5,5 @@
  * @date    2013-08-27 09:40:55
  * @version $Id$
  */
-.row { width: 100%;}
+.row { width: 100%; margin-bottom: 20px;}
 .row .label { width: 150px; display: block; float: left;}
