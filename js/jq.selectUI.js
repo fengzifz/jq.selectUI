@@ -3,7 +3,7 @@
  * @authors Your Name (you@example.org)
  * @date    2013-08-29 16:49:46
  * @version $Id$
- http://www.8stream.com/scripts/styleSelect/
+ * http://www.8stream.com/scripts/styleSelect/
  */
 
 (function($){
@@ -39,6 +39,14 @@
 			return HTML;
 		}
 
+		function createSelectedHTML(){
+			var HTML = [], data = getSelectData();
+			for(var i = 0; i < data.length; i++){
+				HTML[i] = '<span class="selected">' + data[i][0] + '</span>'
+			}
+			return HTML;
+		}
+
 		function createMainHTML(){
 			var dataHTML = [], dataHTMLInner, 
 				HTML = createCapHTML(), 
@@ -61,7 +69,8 @@
 		}
 
 		function setSelectedHTML(){
-
+			var HTML = createSelectedHTML();
+			
 		}
 
 		setHTML();
