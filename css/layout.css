@@ -7,3 +7,27 @@
  */
 .row { width: 100%; margin-bottom: 20px;}
 .row .label { width: 150px; display: block; float: left;}
+
+.selectUI { float: left;}
+
+
+/* Clearfix */
+* html .clearfix {
+	height: 1%; /* IE5-6 */
+}
+
+.clearfix {
+	display: inline-block; /* IE7xhtml*/
+}
+
+html[xmlns] .clearfix {
+	display: block; /* O */
+}
+
+.clearfix:after {
+	clear: both;
+	content: "."; /* FF, O, etc. */
+	display: block;
+	height: 0;
+	visibility: hidden;
+}

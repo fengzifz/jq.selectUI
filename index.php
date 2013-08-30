@@ -18,9 +18,9 @@
             <span class="label">Your name:</span>
             <input type="text" name="name" id="name" />
         </div>
-    	<div class="row">
+    	<div class="row clearfix">
             <label class="label">Your language:</label>
-            <select id="language" name="language" class="selectUI">
+            <select id="language" name="language" class="changeStyle">
                 <option>Javascript</option>
                 <option>PHP</option>
                 <option>Ruby</option>
@@ -28,15 +28,15 @@
                 <option>Java</option>
             </select>
         </div>
-        <div class="row">
+        <div class="row clearfix">
             <label class="label">Your color:</label>
-            <select id="color" name="color" class="selectUI">
+            <select id="color" name="color" class="changeStyle">
                 <option>red</option>
                 <option>blue</option>
                 <option>black</option>
             </select>
         </div>
-        <div class="row">
+        <div class="row clearfix">
             <label class="label">Default UI</label>
             <select id="default" name="default">
                 <option>No changed 1</option>
@@ -53,7 +53,7 @@
 <script type="text/javascript">
 (function($){
     var option = {showTop: false, showBottom: false};
-    $('.selectUI').selectUI(option);
+    $('.changeStyle').selectUI(option);
 })(jQuery)
 
 </script>

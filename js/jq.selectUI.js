@@ -1,9 +1,14 @@
 /**
  * 
- * @authors Your Name (you@example.org)
+ * @Damon   398846606@qq.com
  * @date    2013-08-29 16:49:46
- * @version $Id$
+ * @陈子峰_ 新浪微博
+ * @github  http://github.com/fengzifz
  * http://www.8stream.com/scripts/styleSelect/
+ */
+
+/**
+ * 
  */
 
 (function($){
@@ -13,12 +18,9 @@
 			me = this,
 			options = $.extend({
 				showTop: true,
-				showBottom: true
+				showBottom: true,
+				height: 20
 			}, opts);
-
-		function init(){
-
-		}
 
 		function getSelectData(){
 			var el = [];
@@ -42,7 +44,7 @@
 		function createSelectedHTML(){
 			var HTML = [], data = getSelectData();
 			for(var i = 0; i < data.length; i++){
-				HTML[i] = '<span class="selected">' + data[i][0] + '</span>'
+				HTML[i] = '<div class="selected">' + data[i][0] + '</div>'
 			}
 			return HTML;
 		}
@@ -56,7 +58,7 @@
 				for(var j = 0; j < data[i].length; j++){
 					dataHTMLInner += '<li class="opt-' + data[i][j] + '">' + data[i][j] + '</li>';
 				}
-				dataHTML[i] = '<div class="selectUI">' + HTML.top + '<div class="sMiddle"><ul class="select-' + i + '">' + dataHTMLInner + '</ul></div>' + HTML.bottom + '</div>';
+				dataHTML[i] = '<div class="selectUI" style="position:relative;"><div class="data-wrapper">' + HTML.top + '<div class="sMiddle"><ul class="select-' + i + '">' + dataHTMLInner + '</ul></div>' + HTML.bottom + '</div></div>';
 			}
 			return dataHTML;
 		}
@@ -70,10 +72,79 @@
 
 		function setSelectedHTML(){
 			var HTML = createSelectedHTML();
-			
+			setHTML();
+			$el.each(function(i){
+				$(HTML[i]).appendTo($(this).parent().find('.selectUI'));
+			});
 		}
 
-		setHTML();
+		function init(){
+			setSelectedHTML();
+			$el.css('display','none');
+
+			$('.data-wrapper').css({
+				'display' : 'none',
+				'position': 'absolute',
+				'left'    : '0px',
+				'top'     : '0px'
+			});
+
+			$('.selected').css({
+				'height'  : options.height,
+				'cursor'  : 'pointer'
+			});
+		}
+
+		function isShowDropdown(){
+			init();
+			$('.selected').each(function(){
+				$(this).click(function(){
+					if(!$(this).hasClass('active')){
+						$(this).addClass('active').parent().find('.data-wrapper').css({
+							'display' : 'block',
+							'top'     : $(this).height(),
+							'left'    : '0px'
+						});
+					} else {
+						$(this).removeClass('active').parent().find('.data-wrapper').css({
+							'display' : 'none'
+						});
+					}
+				});
+			});
+		}
+
+		function isHoverDropdown(){
+			var isHover = false;
+			$('.data-wrapper').hover(function(){
+				isHover = true;
+			}, function(){
+				isHover = false;
+			});
+			return isHover;
+		}
+
+		function documentClick(){
+			var isDataHover = isHoverDropdown();
+			$(document).click(function(){
+				if(!isDataHover && $('.selected').hasClass('active')){
+					$('.data-wrapper').css('display','none');
+				}
+			});
+		}
+
+		function selectData(){
+
+		}
+
+		function passValue(){
+
+		}
+
+		isShowDropdown();
+		isHoverDropdown();
+		documentClick();
+
 	}
 
 	$.fn.selectUI = function(options){
