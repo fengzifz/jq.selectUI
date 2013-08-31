@@ -56,7 +56,7 @@
 			for(var i = 0; i < data.length; i++){
 				dataHTMLInner = '';
 				for(var j = 0; j < data[i].length; j++){
-					dataHTMLInner += '<li class="opt-' + data[i][j] + '">' + data[i][j] + '</li>';
+					dataHTMLInner += '<li class="opt-' + data[i][j] + '"><span>' + data[i][j] + '</span></li>';
 				}
 				dataHTML[i] = '<div class="selectUI" style="position:relative;"><div class="data-wrapper">' + HTML.top + '<div class="sMiddle"><ul class="select-' + i + '">' + dataHTMLInner + '</ul></div>' + HTML.bottom + '</div></div>';
 			}
@@ -93,6 +93,9 @@
 				'height'  : options.height,
 				'cursor'  : 'pointer'
 			});
+			$('.data-wrapper li').css({
+				'cursor'  : 'pointer'
+			});
 		}
 
 		function isShowDropdown(){
@@ -114,27 +117,23 @@
 			});
 		}
 
-		function isHoverDropdown(){
-			var isHover = false;
-			$('.data-wrapper').hover(function(){
+		function documentClick(){
+			var isHover;
+			$('.data-wrapper, .selected').hover(function(){
 				isHover = true;
 			}, function(){
 				isHover = false;
 			});
-			return isHover;
-		}
-
-		function documentClick(){
-			var isDataHover = isHoverDropdown();
 			$(document).click(function(){
-				if(!isDataHover && $('.selected').hasClass('active')){
+				if(!isHover){
 					$('.data-wrapper').css('display','none');
+					$('.selected').removeClass('active');
 				}
 			});
 		}
 
 		function selectData(){
-
+			
 		}
 
 		function passValue(){
@@ -142,9 +141,7 @@
 		}
 
 		isShowDropdown();
-		isHoverDropdown();
 		documentClick();
-
 	}
 
 	$.fn.selectUI = function(options){
