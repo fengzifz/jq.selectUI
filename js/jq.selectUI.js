@@ -5,6 +5,7 @@
  * @陈子峰_ 新浪微博
  * @github  http://github.com/fengzifz
  * http://www.8stream.com/scripts/styleSelect/
+ * http://www.cnblogs.com/QQJnet/archive/2011/12/11/2284174.html
  */
 
 /**
@@ -133,7 +134,17 @@
 		}
 
 		function selectData(){
-			
+			$('.data-wrapper').each(function(i){
+				var selectIndex = i;
+				$(this).find('li').click(function(){
+					var liIndex = $(this).index();
+					var dataWrapper = $(this).parent().parent().parent();
+					var data = $(this).find('span').text();
+					dataWrapper.css('display','none').siblings('.selected').removeClass('active').text(data);
+					alert(selectIndex + ', ' + liIndex)
+					dataWrapper.parent().siblings('select').get(selectIndex).selectedIndex = liIndex;
+				});
+			});
 		}
 
 		function passValue(){
@@ -142,6 +153,7 @@
 
 		isShowDropdown();
 		documentClick();
+		selectData();
 	}
 
 	$.fn.selectUI = function(options){

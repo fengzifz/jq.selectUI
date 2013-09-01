@@ -21,19 +21,19 @@
     	<div class="row clearfix">
             <label class="label">Your language:</label>
             <select id="language" name="language" class="changeStyle">
-                <option>Javascript</option>
-                <option>PHP</option>
-                <option>Ruby</option>
-                <option>HTML/CSS</option>
-                <option>Java</option>
+                <option value="Javascript">Javascript</option>
+                <option value="PHP">PHP</option>
+                <option value="Ruby">Ruby</option>
+                <option value="HTML/CSS">HTML/CSS</option>
+                <option value="Java">Java</option>
             </select>
         </div>
         <div class="row clearfix">
             <label class="label">Your color:</label>
             <select id="color" name="color" class="changeStyle">
-                <option>red</option>
-                <option>blue</option>
-                <option>black</option>
+                <option value="red">red</option>
+                <option value="blue">blue</option>
+                <option value="black">black</option>
             </select>
         </div>
         <div class="row clearfix">

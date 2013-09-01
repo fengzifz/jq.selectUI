@@ -6,8 +6,8 @@
  * @version $Id$
  */
 
-echo $_GET['name'];
-echo $_GET['language'];
-echo $_GET['color'];
+echo $_GET['name'].'<br>';
+echo $_GET['language'].'<br>';
+echo $_GET['color'].'<br>';
 
 ?>
