@@ -141,8 +141,7 @@
 					var dataWrapper = $(this).parent().parent().parent();
 					var data = $(this).find('span').text();
 					dataWrapper.css('display','none').siblings('.selected').removeClass('active').text(data);
-					alert(selectIndex + ', ' + liIndex)
-					dataWrapper.parent().siblings('select').get(selectIndex).selectedIndex = liIndex;
+					dataWrapper.parent().siblings('select').get(0).selectedIndex = liIndex;
 				});
 			});
 		}
