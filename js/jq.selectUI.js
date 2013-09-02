@@ -9,18 +9,22 @@
  */
 
 /**
- * update
+ * Release History
+ * 0.1.0
  */
 
 (function($){
 	function SelectUI(elements, opts){
 		var el = elements,
 			$el = $(el),
-			me = this,
+			selectUiClass = 'selectUI',
+			selectedClass = 'selected',
+			dataClass = 'data-wrapper',
 			options = $.extend({
-				showTop: true,
+				showTop: true, //Top 和 Bottom 是两个div层，用于调整下拉选项的样式
 				showBottom: true,
-				height: 20
+				height: 20, // <div class="selected"> 的高度
+				clickOtherToHide: true //点击下拉选项以外的地方时，隐藏下拉选项
 			}, opts);
 
 		function getSelectData(){
@@ -45,7 +49,7 @@
 		function createSelectedHTML(){
 			var HTML = [], data = getSelectData();
 			for(var i = 0; i < data.length; i++){
-				HTML[i] = '<div class="selected">' + data[i][0] + '</div>'
+				HTML[i] = '<div class="' + selectedClass + '">' + data[i][0] + '</div>'
 			}
 			return HTML;
 		}
@@ -59,7 +63,7 @@
 				for(var j = 0; j < data[i].length; j++){
 					dataHTMLInner += '<li class="opt-' + data[i][j] + '"><span>' + data[i][j] + '</span></li>';
 				}
-				dataHTML[i] = '<div class="selectUI" style="position:relative;"><div class="data-wrapper">' + HTML.top + '<div class="sMiddle"><ul class="select-' + i + '">' + dataHTMLInner + '</ul></div>' + HTML.bottom + '</div></div>';
+				dataHTML[i] = '<div class="' + selectUiClass + '" style="position:relative;"><div class="' + dataClass + '">' + HTML.top + '<div class="sMiddle"><ul class="select-' + i + '">' + dataHTMLInner + '</ul></div>' + HTML.bottom + '</div></div>';
 			}
 			return dataHTML;
 		}
@@ -75,89 +79,78 @@
 			var HTML = createSelectedHTML();
 			setHTML();
 			$el.each(function(i){
-				$(HTML[i]).appendTo($(this).parent().find('.selectUI'));
+				$(HTML[i]).appendTo($(this).siblings('.' + selectUiClass));
 			});
 		}
 
-		function init(){
+		// init
+		(function(){
 			setSelectedHTML();
 			$el.css('display','none');
 
-			$('.data-wrapper').css({
-				'display' : 'none',
-				'position': 'absolute',
-				'left'    : '0px',
-				'top'     : '0px'
+			$('.' + dataClass).css({
+				display  : 'none',
+				position : 'absolute',
+				left     : '0px',
+				top      : '0px'
 			});
 
-			$('.selected').css({
-				'height'  : options.height,
-				'cursor'  : 'pointer'
+			$('.' + selectedClass).css({
+				height   : options.height,
+				cursor   : 'pointer'
 			});
-			$('.data-wrapper li').css({
-				'cursor'  : 'pointer'
-			});
-		}
+		})();
 
-		function isShowDropdown(){
-			init();
-			$('.selected').each(function(){
-				$(this).click(function(){
-					if(!$(this).hasClass('active')){
-						$(this).addClass('active').parent().find('.data-wrapper').css({
-							'display' : 'block',
-							'top'     : $(this).height(),
-							'left'    : '0px'
-						});
-					} else {
-						$(this).removeClass('active').parent().find('.data-wrapper').css({
-							'display' : 'none'
-						});
-					}
-				});
+		$('.' + selectedClass).each(function(){
+			$(this).click(function(){
+				if(!$(this).hasClass('active')){
+					$(this).addClass('active').siblings('.' + dataClass).css({
+						display : 'block',
+						top     : $(this).height(),
+						left    : '0px'
+					});
+				} else {
+					$(this).removeClass('active').siblings('.' + dataClass).css({
+						display : 'none'
+					});
+				}
 			});
-		}
+		});
 
-		function documentClick(){
+		// 点击下拉选项外的位置时，隐藏下拉选项
+		function hideSelection(){
 			var isHover;
-			$('.data-wrapper, .selected').hover(function(){
+			$('.' + dataClass + ', .' + selectedClass).hover(function(){
 				isHover = true;
 			}, function(){
 				isHover = false;
 			});
 			$(document).click(function(){
 				if(!isHover){
-					$('.data-wrapper').css('display','none');
-					$('.selected').removeClass('active');
+					$('.' + dataClass).css('display','none');
+					$('.' + selectedClass).removeClass('active');
 				}
 			});
 		}
 
-		function selectData(){
-			$('.data-wrapper').each(function(i){
-				var selectIndex = i;
-				$(this).find('li').click(function(){
-					var liIndex = $(this).index();
-					var dataWrapper = $(this).parent().parent().parent();
-					var data = $(this).find('span').text();
-					dataWrapper.css('display','none').siblings('.selected').removeClass('active').text(data);
-					dataWrapper.parent().siblings('select').get(0).selectedIndex = liIndex;
-				});
+		// 选择选项，替换隐藏的select的选项
+		$('.' + dataClass).each(function(i){
+			var selectIndex = i;
+			$(this).find('li').click(function(){
+				var liIndex = $(this).index();
+				var data = $(this).find('span').text();
+				$(this).closest('.' + dataClass).css('display','none').siblings('.' + selectedClass).removeClass('active').text(data);
+				$(this).closest('.' + selectUiClass).siblings('select').get(0).selectedIndex = liIndex;
 			});
+		});
+
+		if(options.clickOtherToHide){
+			hideSelection();
 		}
-
-		function passValue(){
-
-		}
-
-		isShowDropdown();
-		documentClick();
-		selectData();
 	}
 
 	$.fn.selectUI = function(options){
 		return new SelectUI(this, options);
 	}
 
-	
 })(jQuery);
